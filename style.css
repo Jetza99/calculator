@@ -4,11 +4,14 @@
     --color-operator: 164, 236, 164;
     --color-AC: 231, 229, 122;
 }
-
+body{
+    margin: 0;
+}
 main{
     height: 100vh;
     width: auto;
     position: relative;
+    background-color: rgb(243, 212, 159);
 }
 
 .calculator_container{
@@ -36,7 +39,7 @@ main{
     position: absolute;
     bottom: 0;
     right: 5%;
-    color: white;
+    color: rgb(155, 236, 32);
 }
 
 .calculator_body{
@@ -109,7 +112,7 @@ main{
 }
 /* MEDIA SCREEN */
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1000px) {
     .calculator_container{
         width: 30%;
         height: 74%;
@@ -117,10 +120,20 @@ main{
         box-shadow: 0px 4px 43px -13px rgba(0,0,0,0.75);
         padding: 2% 2% 4% 2%;
         position: absolute;
- 
         left: 50%;
         transform: translate(-50%, 13%);
     }
+
+.btn{
+    font-weight: bold;
+    font-family: sans-serif;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 80%);
+    color: rgb(39, 39, 39);
+}
 }
 
 
