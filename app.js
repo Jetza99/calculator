@@ -1,94 +1,146 @@
 const display = document.querySelector(".display_text");
-const numbers = document.querySelectorAll(".number");
-const operators = document.querySelectorAll(".operator");
-const equals = document.querySelector(".equals");
-const percentageElem = document.querySelector(".percentage");
-const ac = document.querySelector(".AC");
+const numberKeys = document.querySelectorAll(".number");
+const operatorKeys = document.querySelectorAll(".operator");
+const percent = document.querySelector(".percentage");
+const decimal = document.querySelector(".decimal");
+const negate = document.querySelector(".negation");
+const clear = document.querySelector(".AC");
 
 
 
-display.textContent = "";
-let cpt = 0;
-let value = 0;
-let value2 = 0;
-let result = 0;
-let operatorSym = "";
-let clickedOp = false;
+
+let firstNum;
+let operator = "";
+let displayValue = "";
+let waitingForSecondNum = false;
+let inputValue;
+let nextOperator = "";
 
 
-numbers.forEach(number => number.addEventListener("click", handler));
 
-function handler(){
-        let bool = clickedOp;
-        if(!bool){
-            display.textContent = display.textContent + this.textContent;
-            if(display.textContent.length == 9){
-                numbers.forEach(number => number.removeEventListener("click", handler));
-            }
-            value = parseFloat(display.textContent);
-            
-        }else if(bool){
-            display.textContent = display.textContent + this.textContent;
-            if(display.textContent.length == 9){
-                numbers.forEach(number => number.removeEventListener("click", handler));
-            }
-            value2 = parseFloat(display.textContent);
-        }
-        
+decimal.addEventListener("click", () => {
+
+    if(waitingForSecondNum){
+        displayValue = "0.";
+        updateDisplay();
+        waitingForSecondNum = false;
+        return;
+    }
+
+    if(!displayValue.includes(".")){
+        displayValue += ".";
+        updateDisplay();
+    }
+});
+
+
+percent.addEventListener("click", () => {
+
+    const result = parseFloat(displayValue) * 0.01;
+    displayValue = `${parseFloat(result.toFixed(7))}`;
+    firstNum = result;
+    updateDisplay();
+
+
+});
+
+negate.addEventListener("click", () => {
+
+    const result = parseFloat(displayValue) * -1;
+    displayValue = String(result);
+    firstNum = result;
+    updateDisplay();
+
+
+});
+
+
+
+function updateDisplay(){
+    const display = document.querySelector(".display_text");
+    display.textContent = displayValue;
 }
 
-operators.forEach(operator => operator.addEventListener("click", () => {
-    clickedOp = true;
-    display.textContent = "";
-    operatorSym = operator.classList[operator.classList.length - 1]; 
+
+numberKeys.forEach(numberKey => numberKey.addEventListener("click", inputHandler));
+
+function inputHandler(){
+
+    if(display.textContent == "0"){
+        display.textContent = this.textContent;
+
+    }else{
+        if(waitingForSecondNum == true){
+            display.textContent = "";
+            waitingForSecondNum = false;
+        }
+    
+        display.textContent += this.textContent;
+    
+        if(display.textContent.length == 9){
+            numberKeys.forEach(numberKey => numberKey.removeEventListener("click", handler));
+        }
+    }
+
+    
+    displayValue = display.textContent;
+
+}
+
+
+
+operatorKeys.forEach(operatorKey => operatorKey.addEventListener("click", () => {
+
+
+    waitingForSecondNum = true;
+
+    nextOperator = operatorKey.classList[operatorKey.classList.length - 1]; 
+    inputValue = parseFloat(displayValue);
+
+    
+    if((firstNum == undefined) && (!isNaN(inputValue))){
+        firstNum = inputValue;
+
+    } else if(operator){
+        const result = calculate(firstNum, inputValue, operator);
+        displayValue = `${parseFloat(result.toFixed(7))}`;
+        firstNum = result;
+        updateDisplay();
+    }
+
+    operator = nextOperator;
+
+
 }));
 
 
-function operate(){
-    switch(operatorSym){
-        case "+": display.textContent = add(value, value2); break;
-        case "-": display.textContent = subtract(value, value2); break;
-        case "*": display.textContent = multiply(value, value2); break;
-        case "/": display.textContent = divide(value, value2); break;
-        case "%": display.textContent = percentage(value); break;
-
-
-    }
+function calculate(firstOperand, secondOperand, thisOp){
+    if (thisOp === '+') {
+        return firstOperand + secondOperand;
+      } else if (thisOp === '-') {
+        return firstOperand - secondOperand;
+      } else if (thisOp === '*') {
+        return firstOperand * secondOperand;
+      } else if (thisOp === '/') {
+        return firstOperand / secondOperand;
+      } 
+    
+      return secondOperand;
 }
 
-function add(a, b) {
-    result = a + b;
-	return result;
-}
+clear.addEventListener("click", () => {
 
-function subtract(a, b) {
-	result = a - b;
-    return result;
-}
-function multiply(a, b) {
-    result = a * b;
-	return result;
-}
-function divide(a, b) {
-    result = a / b;
-	return result;
-}
-function percentage(a) {
-    result = a * 0.01;
-    a = result;
-	return a;
-}
+    display.textContent = "0";
+    displayValue = "";
+    firstNum = undefined;
+    operator = "";
+    waitingForSecondNum = false;
+    inputValue = undefined;
+    nextOperator = "";
 
-equals.addEventListener("click", () => {
-    operate();
-    result = 0;
-    clickedOp = false;
-    value = 0;
+
+
 });
 
-ac.addEventListener("click", () => {
-    result = 0;
-    value = 0;
-    display.textContent = "";
-    clickedOp = false;
-});
+
+
