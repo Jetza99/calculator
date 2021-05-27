@@ -5,7 +5,8 @@ const percent = document.querySelector(".percentage");
 const decimal = document.querySelector(".decimal");
 const negate = document.querySelector(".negation");
 const clear = document.querySelector(".AC");
-
+let computedFontSize = window.getComputedStyle
+                        (document.querySelector(".display_text")).fontSize;
 
 
 
@@ -103,7 +104,12 @@ operatorKeys.forEach(operatorKey => operatorKey.addEventListener("click", () => 
 
     } else if(operator){
         const result = calculate(firstNum, inputValue, operator);
-        displayValue = `${parseFloat(result.toFixed(7))}`;
+
+        if(computedFontSize == "45px"){
+            displayValue = `${parseFloat(result.toFixed(3))}`;
+        }else if(computedFontSize != "45px"){
+            displayValue = `${parseFloat(result.toFixed(5))}`;
+        }
         firstNum = result;
         updateDisplay();
     }
