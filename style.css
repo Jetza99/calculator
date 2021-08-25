@@ -37,7 +37,7 @@ main {
   position: absolute;
   bottom: 0;
   right: 5%;
-  color: rgb(155, 236, 32);
+  color: #eff9f0;
 }
 
 .calculator_body {
@@ -99,21 +99,6 @@ main {
 .percentage:hover {
   background-color: #037971e3;
 }
-
-/* ACTIVE EFFECT */
-/* .calculator_btn:active {
-  background-color: rgba(var(--color-number));
-  filter: brightness(0.8);
-}
-.operator:active {
-  background-color: rgba(var(--color-operator));
-  filter: brightness(0.8);
-}
-.AC:active {
-  background-color: rgb(231, 229, 122);
-  filter: brightness(0.3);
-} */
-
 .calculator_btn:active {
   opacity: 0.8;
 }
@@ -148,6 +133,5 @@ main {
     position: absolute;
     bottom: 0;
     right: 5%;
-    color: rgb(155, 236, 32);
   }
 }
