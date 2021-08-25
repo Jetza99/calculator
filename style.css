@@ -26,7 +26,7 @@ main {
 }
 
 .display {
-  background-color: rgb(70, 70, 70);
+  background-color: #01161e;
   height: 20%;
   position: relative;
   margin: 0;
@@ -52,7 +52,7 @@ main {
   grid-column: span 2;
 }
 .calculator_btn {
-  background-color: rgb(212, 211, 211);
+  background-color: #01161e;
   position: relative;
   user-select: none;
 }
@@ -65,18 +65,19 @@ main {
   top: 0;
   left: 50%;
   transform: translate(-50%, 50%);
-  color: rgb(39, 39, 39);
+  color: #eff9f0;
 }
 
-.operator {
-  background-color: rgb(164, 236, 164);
-}
+.operator,
 .percentage {
-  background-color: rgb(164, 236, 164);
+  background-color: #037971;
+}
+.basic-op {
+  background: #a30b37;
 }
 
 .AC {
-  background-color: rgb(231, 229, 122);
+  background-color: #f4ac45;
 }
 
 .fa-circle {
@@ -131,7 +132,7 @@ main {
     top: 0;
     left: 50%;
     transform: translate(-50%, 80%);
-    color: rgb(39, 39, 39);
+    color: #eff9f0;
   }
   .display_text {
     font-family: monospace;
