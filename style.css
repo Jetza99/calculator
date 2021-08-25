@@ -68,7 +68,7 @@ main {
   color: #eff9f0;
 }
 
-.operator,
+.negation,
 .percentage {
   background-color: #037971;
 }
@@ -86,18 +86,22 @@ main {
 
 /*  HOVER EFFECT */
 .calculator_btn:hover {
-  background-color: rgba(var(--color-number), 0.5);
+  background-color: #021922e5;
 }
 .operator:hover {
-  background-color: rgba(var(--color-operator), 0.5);
+  background-color: #a30b36d3;
 }
 .AC:hover {
-  background-color: rgb(231, 229, 122);
+  background-color: #f4ab45e3;
   filter: brightness(0.8);
+}
+.negation:hover,
+.percentage:hover {
+  background-color: #037971e3;
 }
 
 /* ACTIVE EFFECT */
-.calculator_btn:active {
+/* .calculator_btn:active {
   background-color: rgba(var(--color-number));
   filter: brightness(0.8);
 }
@@ -108,6 +112,10 @@ main {
 .AC:active {
   background-color: rgb(231, 229, 122);
   filter: brightness(0.3);
+} */
+
+.calculator_btn:active {
+  opacity: 0.8;
 }
 
 /* MEDIA SCREEN */
